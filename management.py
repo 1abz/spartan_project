@@ -179,28 +179,38 @@ def read_field_option():
 
 def save_to_json():
     temp_dict_of_dict = {}
-    for spartan_id in spartan_dict:
-        spartan_object = spartan_dict[spartan_id]
-        spartan_dicti = spartan_object.__dict__
-        temp_dict_of_dict[spartan_id] = spartan_dicti
+    for spartans_id in spartan_dict:
+        spartan_objects = spartan_dict[spartans_id]
+        spartan_dicti = spartan_objects.__dict__
+        temp_dict_of_dict[spartans_id] = spartan_dicti
 
     with open("data.json", "w") as data_file:
         json.dump(temp_dict_of_dict, data_file)
 
-'''
-def load_to_json():
-    global
-    temp_dict_of_dict = {}
+
+def load_from_json():
+    global sparta_dict
     try:
         with open("data.json", "r") as data_file:
             temp_dict_of_dict = json.load(data_file)
-    except:
+    except FileNotFoundError:
         print("The file data.json doesn't exist")
-    print(temp_dict_of_dict)
-    for employee_id_key in temp_dict_of_dict:
-        employee_id = temp_dict_of_dict[employee_id_key]['emp_id']
-    employee_object = Employee[create_employee_ob()]
-'''
+
+        print(temp_dict_of_dict)
+        for sparta_id_key in temp_dict_of_dict:
+            sparta_id = temp_dict_of_dict[sparta_id_key]['id']
+            sparta_fn = temp_dict_of_dict[sparta_id_key]['first_name']
+            sparta_ln = temp_dict_of_dict[sparta_id_key]['last_name']
+            sparta_bd = temp_dict_of_dict[sparta_id_key]['birthDate']
+            sparta_bm = temp_dict_of_dict[sparta_id_key]['birthMonth']
+            sparta_by = temp_dict_of_dict[sparta_id_key]['birthYear']
+            sparta_c = temp_dict_of_dict[sparta_id_key]['course']
+            sparta_s = temp_dict_of_dict[sparta_id_key]['stream']
+
+            s_obj = (sparta_id, sparta_fn, sparta_ln, sparta_bd, sparta_bd, sparta_bm, sparta_by, sparta_c, sparta_s)
+            sparta_dict[spartan_id] = s_obj
+
+
 
 
 
@@ -273,33 +283,3 @@ if __name__ == "__main__":
 
         else:
             print("Unknown option")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
