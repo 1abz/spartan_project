@@ -76,4 +76,38 @@ class Spartan:
         print(f"Spartan course: {self.scourse}")
         print(f"Spartan stream: {self.sstream}")
 
+'''
+def add_spartan_api(sparta_data):
+    sparta_api_dict = {}
+    with open("data.json", "r") as json_file:
+        data = json.load(json_file)
 
+    for sparta_id_key in data:
+        sparta_id = data[sparta_id_key]['sid']
+        sparta_fn = data[sparta_id_key]['sfirst_name']
+        sparta_ln = data[sparta_id_key]['slast_name']
+        sparta_bd = data[sparta_id_key]['sbirth_day']
+        sparta_bm = data[sparta_id_key]['sbirth_month']
+        sparta_by = data[sparta_id_key]['sbirth_year']
+        sparta_c = data[sparta_id_key]['scourse']
+        sparta_s = data[sparta_id_key]['sstream']
+
+        s_obj = (sparta_id, sparta_fn, sparta_ln, sparta_bd, sparta_bm, sparta_by, sparta_c, sparta_s)
+        sparta_api_dict[sparta_id] = s_obj
+
+    sparta_id = sparta_data['sid']
+    sparta_fn = sparta_data['sfirst_name']
+    sparta_ln = sparta_data['slast_name']
+    sparta_bd = sparta_data['sbirth_day']
+    sparta_bm = sparta_data['sbirth_month']
+    sparta_by = sparta_data['sbirth_year']
+    sparta_c = sparta_data['scourse']
+    sparta_s = sparta_data['sstream']
+
+    s_obj = (sparta_id, sparta_fn, sparta_ln, sparta_bd, sparta_bm, sparta_by, sparta_c, sparta_s)
+    sparta_api_dict[sparta_id] = s_obj
+
+    with open("data.json", "w") as data:
+        json.dump(sparta_api_dict, data)
+    return "completed"
+'''

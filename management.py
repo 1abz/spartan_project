@@ -175,7 +175,7 @@ def read_spartan_id_api(spartaId):
         sparta_c = data[sparta_id_key]['scourse']
         sparta_s = data[sparta_id_key]['sstream']
 
-        s_obj = (sparta_id, sparta_fn, sparta_ln, sparta_bd, sparta_bd, sparta_bm, sparta_by, sparta_c, sparta_s)
+        s_obj = (sparta_id, sparta_fn, sparta_ln, sparta_bd, sparta_bm, sparta_by, sparta_c, sparta_s)
         sparta_api_dict[sparta_id] = s_obj
 
 
@@ -200,7 +200,7 @@ def add_spartan_api(sparta_data):
         sparta_c = data[sparta_id_key]['scourse']
         sparta_s = data[sparta_id_key]['sstream']
 
-        s_obj = (sparta_id, sparta_fn, sparta_ln, sparta_bd, sparta_bd, sparta_bm, sparta_by, sparta_c, sparta_s)
+        s_obj = (sparta_id, sparta_fn, sparta_ln, sparta_bd, sparta_bm, sparta_by, sparta_c, sparta_s)
         sparta_api_dict[sparta_id] = s_obj
 
     sparta_id = sparta_data['sid']
@@ -212,7 +212,7 @@ def add_spartan_api(sparta_data):
     sparta_c = sparta_data['scourse']
     sparta_s = sparta_data['sstream']
 
-    s_obj = (sparta_id, sparta_fn, sparta_ln, sparta_bd, sparta_bd, sparta_bm, sparta_by, sparta_c, sparta_s)
+    s_obj = (sparta_id, sparta_fn, sparta_ln, sparta_bd, sparta_bm, sparta_by, sparta_c, sparta_s)
     sparta_api_dict[sparta_id] = s_obj
 
     with open("data.json", "w") as data:

@@ -6,7 +6,7 @@ flask_object = Flask(__name__)
 # http://127.0.0.1:5000/
 @flask_object.route('/', methods=['GET'])
 def homepage():
-    return "Welcome to the Trainee management system. "
+    return 'Welcome to the Trainee management system. "\n" Website homepage: http://127.0.0.1:5000/ "\n" http://127.0.0.1:5000/spartan/add '
 
 # http://127.0.0.1:5000/spartan/add
 @flask_object.route('/spartan/add', methods = ['POST'])
