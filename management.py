@@ -6,7 +6,7 @@ def read_option():
         user_option = input("Spartan Management options: add: Add Spartan, remove: Remove Spartan, list: List Spartan ,update: Update Spartan Data, exit: Exit the app, total: Total number of Spartans, retrieve: Retrieve Spartan using ID: load: Load from json, save: Save to json")
         user_option = user_option.strip()
 
-        if user_option in ["add", "remove", "update", "list", "exit", "total", "retrieve", "save", "load" ]:
+        if user_option in ["add", "remove", "update", "list", "exit", "total", "retrieve", "save", "load"]:
             return user_option
         else:
             print("Error, You should select one of the options in the list")
@@ -160,6 +160,70 @@ def read_spartan_id():
             print("Error, The Spartan ID should be a number")
 
 
+def read_spartan_id_api(spartaId):
+    sparta_api_dict = {}
+    with open("data.json", "r") as json_file:
+        data = json.load(json_file)
+
+    for sparta_id_key in data:
+        sparta_id = data[sparta_id_key]['sid']
+        sparta_fn = data[sparta_id_key]['sfirst_name']
+        sparta_ln = data[sparta_id_key]['slast_name']
+        sparta_bd = data[sparta_id_key]['sbirth_day']
+        sparta_bm = data[sparta_id_key]['sbirth_month']
+        sparta_by = data[sparta_id_key]['sbirth_year']
+        sparta_c = data[sparta_id_key]['scourse']
+        sparta_s = data[sparta_id_key]['sstream']
+
+        s_obj = (sparta_id, sparta_fn, sparta_ln, sparta_bd, sparta_bd, sparta_bm, sparta_by, sparta_c, sparta_s)
+        sparta_api_dict[sparta_id] = s_obj
+
+
+    if int(spartaId) in sparta_api_dict:
+        return str(sparta_api_dict.get(int(spartaId)))
+    else:
+        return "ID key not found"
+
+
+def add_spartan_api(sparta_data):
+    sparta_api_dict = {}
+    with open("data.json", "r") as json_file:
+        data = json.load(json_file)
+
+    for sparta_id_key in data:
+        sparta_id = data[sparta_id_key]['sid']
+        sparta_fn = data[sparta_id_key]['sfirst_name']
+        sparta_ln = data[sparta_id_key]['slast_name']
+        sparta_bd = data[sparta_id_key]['sbirth_day']
+        sparta_bm = data[sparta_id_key]['sbirth_month']
+        sparta_by = data[sparta_id_key]['sbirth_year']
+        sparta_c = data[sparta_id_key]['scourse']
+        sparta_s = data[sparta_id_key]['sstream']
+
+        s_obj = (sparta_id, sparta_fn, sparta_ln, sparta_bd, sparta_bd, sparta_bm, sparta_by, sparta_c, sparta_s)
+        sparta_api_dict[sparta_id] = s_obj
+
+    sparta_id = sparta_data['sid']
+    sparta_fn = sparta_data['sfirst_name']
+    sparta_ln = sparta_data['slast_name']
+    sparta_bd = sparta_data['sbirth_day']
+    sparta_bm = sparta_data['sbirth_month']
+    sparta_by = sparta_data['sbirth_year']
+    sparta_c = sparta_data['scourse']
+    sparta_s = sparta_data['sstream']
+
+    s_obj = (sparta_id, sparta_fn, sparta_ln, sparta_bd, sparta_bd, sparta_bm, sparta_by, sparta_c, sparta_s)
+    sparta_api_dict[sparta_id] = s_obj
+
+    with open("data.json", "w") as data:
+        json.dump(sparta_api_dict, data)
+    return "completed"
+
+
+
+
+
+
 def print_all_spartans_data():
     for spartan_id_key in spartan_dict:
         print(f"(The data of the spartan with Spartan_ID = {spartan_id_key}")
@@ -189,28 +253,27 @@ def save_to_json():
 
 
 def load_from_json():
-    global sparta_dict
+    global spartan_dict
     try:
         with open("data.json", "r") as data_file:
             temp_dict_of_dict = json.load(data_file)
     except FileNotFoundError:
         print("The file data.json doesn't exist")
 
-        print(temp_dict_of_dict)
-        for sparta_id_key in temp_dict_of_dict:
-            sparta_id = temp_dict_of_dict[sparta_id_key]['id']
-            sparta_fn = temp_dict_of_dict[sparta_id_key]['first_name']
-            sparta_ln = temp_dict_of_dict[sparta_id_key]['last_name']
-            sparta_bd = temp_dict_of_dict[sparta_id_key]['birthDate']
-            sparta_bm = temp_dict_of_dict[sparta_id_key]['birthMonth']
-            sparta_by = temp_dict_of_dict[sparta_id_key]['birthYear']
-            sparta_c = temp_dict_of_dict[sparta_id_key]['course']
-            sparta_s = temp_dict_of_dict[sparta_id_key]['stream']
+    for sparta_id_key in temp_dict_of_dict:
+        sparta_id = temp_dict_of_dict[sparta_id_key]['sid']
+        sparta_fn = temp_dict_of_dict[sparta_id_key]['sfirst_name']
+        sparta_ln = temp_dict_of_dict[sparta_id_key]['slast_name']
+        sparta_bd = temp_dict_of_dict[sparta_id_key]['sbirth_day']
+        sparta_bm = temp_dict_of_dict[sparta_id_key]['sbirth_month']
+        sparta_by = temp_dict_of_dict[sparta_id_key]['sbirth_year']
+        sparta_c = temp_dict_of_dict[sparta_id_key]['scourse']
+        sparta_s = temp_dict_of_dict[sparta_id_key]['sstream']
 
-            s_obj = (sparta_id, sparta_fn, sparta_ln, sparta_bd, sparta_bd, sparta_bm, sparta_by, sparta_c, sparta_s)
-            sparta_dict[spartan_id] = s_obj
-
-
+        s_obj = (sparta_id, sparta_fn, sparta_ln, sparta_bd, sparta_bd, sparta_bm, sparta_by, sparta_c, sparta_s)
+        spartan_dict[sparta_id_key] = s_obj
+    print('testing')
+    print(temp_dict_of_dict)
 
 
 
