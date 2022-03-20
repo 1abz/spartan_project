@@ -1,8 +1,5 @@
 import management
-import management1
-from spartan import Spartan
-import json
-from flask import Flask, request,  jsonify
+from flask import Flask
 
 flask_object = Flask(__name__)
 
@@ -15,8 +12,7 @@ def homepage():
 # http://127.0.0.1:5000/spartan/add
 @flask_object.route('/spartan/add', methods = ['POST'])
 def add_spartan():
-    management.add_spartan_api()
-
+    return management.add_spartan_api()
 
 
 

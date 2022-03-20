@@ -5,7 +5,7 @@
 class Spartan:
 
     def __init__(self, sid, first_name, last_name, birthDate, birthMonth, birthYear, course, stream):
-        self.sid = id
+        self.sid = sid
         self.sfirst_name = first_name
         self.slast_name = last_name
         self.sbirth_day = birthDate
