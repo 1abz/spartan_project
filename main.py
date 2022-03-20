@@ -14,18 +14,19 @@ def homepage():
 def add_spartan():
     return management.add_spartan_api()
 
-
-
-
-
-
-
-
-
 # http://127.0.0.1:5000/spartan/1
 @flask_object.route('/spartan/<spartan_id>', methods=['GET'])
 def spartan_record_getter(spartan_id):
-    return management.read_spartan_id_api(spartan_id)
+    return management.spartan_getter(spartan_id)
+
+
+# http://127.0.0.1:5000/spartan/remove?id=353
+@flask_object.route('/spartan/remove', methods=['POST'])
+def spartan_record_deleter():
+    return management.spartan_deleter()
+
+
+
 
 
 if __name__ == "__main__":
