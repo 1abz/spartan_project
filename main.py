@@ -7,7 +7,8 @@ flask_object = Flask(__name__)
 # http://127.0.0.1:5000/
 @flask_object.route('/', methods=['GET'])
 def homepage():
-    return 'Welcome to the Trainee management system. "\n" Website homepage: http://127.0.0.1:5000/ "\n" http://127.0.0.1:5000/spartan/add '
+    return 'Welcome to the Trainee management system. "\n" Website homepage: http://127.0.0.1:5000/ "\n" ' \
+           'http://127.0.0.1:5000/spartan/add '
 
 # http://127.0.0.1:5000/spartan/add
 @flask_object.route('/spartan/add', methods = ['POST'])
@@ -25,10 +26,11 @@ def spartan_record_getter(spartan_id):
 def spartan_record_deleter():
     return management.spartan_deleter(id)
 
+
 # http://127.0.0.1:5000/spartan
 @flask_object.route('/spartan', methods=['GET'])
 def whole_spartan_list():
-    return 'check 1-2'
+    return management.spartan_list()
 
 
 if __name__ == "__main__":

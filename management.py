@@ -1,6 +1,6 @@
 from spartan import Spartan
 import json
-from flask import request, jsonify
+from flask import request
 
 all_spartans = {}
 
@@ -27,7 +27,6 @@ def add_spartan_api():
     tempdict_spartans = {}
     new_spartan_obj = spartan_api_insert()
 
-
     idstr = str(new_spartan_obj.get_id())
     all_spartans[idstr] = new_spartan_obj
 
@@ -35,8 +34,7 @@ def add_spartan_api():
         spartan_obj = all_spartans[spartan_id]
         spartan_dict = spartan_obj.__dict__
         tempdict_spartans[spartan_id] = spartan_dict
-        
-        
+
     with open("data.json", "w") as data_file:
         json.dump(tempdict_spartans, data_file)
     
@@ -49,8 +47,8 @@ def spartan_getter(spartan_id):
     try:
         with open("data.json", "r") as data_file:
             loaded_dictionary = json.load(data_file)
-    except FileNotFoundError as file_not_found_error:
-        print(file_not_found_error)
+    except FileNotFoundError:
+        print('File named data.json not found')
 
     for s_Id in loaded_dictionary:
         sparta_id = loaded_dictionary[s_Id]['sid']
@@ -88,8 +86,8 @@ def spartan_deleter(id_requested):
     try:
         with open("data.json", "r") as data_file:
             loaded_dictionary = json.load(data_file)
-    except FileNotFoundError as file_not_found_error:
-        print(file_not_found_error)
+    except FileNotFoundError:
+        print('File named data.json not found')
 
     for s_Id in loaded_dictionary:
         sparta_id = loaded_dictionary[s_Id]['sid']
@@ -119,6 +117,17 @@ def spartan_deleter(id_requested):
         return f'Spartan: {id_requested} successfully deleted'
     else:
         return f'Spartan: {id_requested} not in database'
+
+
+def spartan_list():
+    global all_spartans
+    all_spartans_temp_dict = {}
+    try:
+        with open("data.json", "r") as data_file:
+            all_spartans_temp_dict = json.load(data_file)
+    except FileNotFoundError:
+        print('File named data.json not found')
+    return all_spartans_temp_dict
 
 
 
