@@ -75,11 +75,15 @@ def spartan_getter(spartan_id):
         id_integer = int(spartan_id)
         if id_integer in tempdict_spartans:
             return tempdict_spartans[id_integer]
+        else:
+            return f'Spartan: {id_integer} is not in database'
 
 
-def spartan_deleter(id):
+
+def spartan_deleter(id_requested):
     global all_spartans
-    id = int(request.args.get("id"))
+    tempdict_spartans = {}
+    id_requested = int(request.args.get("id"))
 
     try:
         with open("data.json", "r") as data_file:
@@ -101,6 +105,20 @@ def spartan_deleter(id):
 
         all_spartans[sparta_id] = loaded_spartan
 
+
+    if id_requested in all_spartans.keys():
+        del all_spartans[id_requested]
+        for spartan_id in all_spartans:
+            spartan_obj = all_spartans[spartan_id]
+            spartan_dict = spartan_obj.__dict__
+            tempdict_spartans[spartan_id] = spartan_dict
+
+        with open("data.json", "w") as data_file:
+            json.dump(tempdict_spartans, data_file)
+
+        return f'Spartan: {id_requested} successfully deleted'
+    else:
+        return f'Spartan: {id_requested} not in database'
 
 
 
