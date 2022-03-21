@@ -5,8 +5,52 @@ from flask import request
 all_spartans = {}
 
 
-def spartan_api_insert():
-    spartan_data = request.json
+def spartan_validation(spartan_data):
+
+    sparta_id = spartan_data['sid']
+    id = int(sparta_id)
+    if id < 1:
+        return "Error, The Spartan ID should be positive number"
+
+    sparta_fn = spartan_data['sfirst_name']
+    sparta_fn = sparta_fn.strip()
+    if len(sparta_fn) <= 2:
+        return "Error, The Spartan first name should be at least 2 characters"
+
+    sparta_ln = spartan_data['slast_name']
+    sparta_ln = sparta_ln.strip()
+    if len(sparta_ln) < 2:
+        return "Error, The Spartan last name should be at least 2 characters"
+
+    sparta_bd = spartan_data['sbirth_day']
+    day = int(sparta_bd)
+    if (day < 1) or (day > 31):
+        return "Error, The Spartan birth date should be between 1 and 31."
+
+    sparta_bm = spartan_data['sbirth_month']
+    month = int(sparta_bm)
+    if (month < 1) or (month > 12):
+        return "Error, The Spartan birth month should be between 1 and 12."
+
+    sparta_by = spartan_data['sbirth_year']
+    year = int(sparta_by)
+    if (year < 1900) or (year > 2004):
+        return "Error, The Spartan birth year should be between 1900 and 2004."
+
+    sparta_c = spartan_data['scourse']
+    sparta_c = sparta_c.strip()
+    if len(sparta_c) < 3:
+        return "Error, The Spartan course name should be at least 3 characters"
+
+    sparta_s = spartan_data['sstream']
+    sparta_s = sparta_s.strip()
+    if len(sparta_s) < 3:
+        return "Error, The Spartan stream name should be at least 3 characters"
+
+    return None
+
+
+def create_new_spartan(spartan_data):
 
     sparta_id = spartan_data['sid']
     sparta_fn = spartan_data['sfirst_name']
@@ -23,22 +67,28 @@ def spartan_api_insert():
 
 
 def add_spartan_api():
+
     global all_spartans
     tempdict_spartans = {}
-    new_spartan_obj = spartan_api_insert()
+    spartan_data = request.json
+    data_validation = spartan_validation(spartan_data)
+    if data_validation is None:
+        new_spartan_obj = create_new_spartan(spartan_data)
 
-    idstr = str(new_spartan_obj.get_id())
-    all_spartans[idstr] = new_spartan_obj
+        idstr = str(new_spartan_obj.get_id())
+        all_spartans[idstr] = new_spartan_obj
 
-    for spartan_id in all_spartans:
-        spartan_obj = all_spartans[spartan_id]
-        spartan_dict = spartan_obj.__dict__
-        tempdict_spartans[spartan_id] = spartan_dict
+        for spartan_id in all_spartans:
+            spartan_obj = all_spartans[spartan_id]
+            spartan_dict = spartan_obj.__dict__
+            tempdict_spartans[spartan_id] = spartan_dict
 
-    with open("data.json", "w") as data_file:
-        json.dump(tempdict_spartans, data_file)
-    
-    return 'New Spartan Successfully added.'
+        with open("data.json", "w") as data_file:
+            json.dump(tempdict_spartans, data_file)
+
+        return 'New Spartan Successfully added.'
+    else:
+        return data_validation
 
 
 def spartan_getter(spartan_id):
