@@ -115,20 +115,17 @@ def spartan_getter(spartan_id):
         all_spartans[sparta_id] = loaded_spartan
 
     tempdict_spartans = {}
-
-    for id in all_spartans:
-        spartan_object = all_spartans[id]
+    for sparta_id in all_spartans:
+        spartan_object = all_spartans[sparta_id]
         spartans_dict = spartan_object.__dict__
-        tempdict_spartans[id] = spartans_dict
-        id_integer = int(spartan_id)
-        if id_integer in tempdict_spartans:
-            return tempdict_spartans[id_integer]
-        else:
-            return f'Spartan: {id_integer} is not in database'
+        tempdict_spartans[sparta_id] = spartans_dict
+        int_id = int(spartan_id)
+        if int_id in tempdict_spartans:
+            return tempdict_spartans[int_id]
 
 
 
-def spartan_deleter(id_requested):
+def spartan_deleter(spartan_id):
     global all_spartans
     tempdict_spartans = {}
     id_requested = int(request.args.get("id"))
@@ -166,7 +163,7 @@ def spartan_deleter(id_requested):
 
         return f'Spartan: {id_requested} successfully deleted'
     else:
-        return f'Spartan: {id_requested} not in database'
+        return f'Spartan: {id_requested} is not in database'
 
 
 def spartan_list():
@@ -178,12 +175,6 @@ def spartan_list():
     except FileNotFoundError:
         print('File named data.json not found')
     return all_spartans_temp_dict
-
-
-
-
-
-
 
 
 

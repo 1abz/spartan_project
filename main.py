@@ -7,11 +7,29 @@ flask_object = Flask(__name__)
 # http://127.0.0.1:5000/
 @flask_object.route('/', methods=['GET'])
 def homepage():
-    return 'Welcome to the Trainee management system. "\n" Website homepage: http://127.0.0.1:5000/ "\n" ' \
-           'http://127.0.0.1:5000/spartan/add '
+    description = '''
+
+    1 -  http://127.0.0.1:5000/ - HOMEPAGE  
+    
+    2 -  http://127.0.0.1:5000/spartan/add  - METHOD=POST route: /spartan/add 
+        Use this API to save the detail of new spartan into a JSON database
+        
+    3 -  http://127.0.0.1:5000/spartan/1 - METHOD=GET route: /spartan/<spartan_id>
+        Use this API to display details of spartan using the spartan ID. Replace "1" with any ID on the database.
+        An error message should be returned if the spartan_id doesn't exist in the system. 
+      
+    4 -  http://127.0.0.1:5000/spartan/remove?id=353 - METHOD=POST route: /spartan/remove?id=sparta_id 
+        Use this API to delete details of spartan using the spartan ID. Replace "353" with any ID on the database.
+    
+    5 - http://127.0.0.1:5000/spartan - METHOD: GET, route: /spartan 
+        Use this API to display details of all spartans in database of json file. 
+        '''
+
+    return description
+
 
 # http://127.0.0.1:5000/spartan/add
-@flask_object.route('/spartan/add', methods = ['POST'])
+@flask_object.route('/spartan/add', methods=['POST'])
 def add_spartan():
     return management.add_spartan_api()
 
