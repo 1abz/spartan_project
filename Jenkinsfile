@@ -1,9 +1,13 @@
 pipeline {
 agent any
 
+
+
 environment {
-IMAGE_NAME = "1abz/mongo_spartan:1.0" + "$BUILD_NUMBER"
-    }
+IMAGE_NAME = '1abz/spartan_test:1.' + "$BUILD_NUMBER"
+DOCKER_CREDNETIALS = "docker_hub_cred"
+}
+
 
 
 stages {
