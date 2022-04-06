@@ -1,8 +1,9 @@
 pipeline {
 agent any
+
 environment {
 IMAGE_NAME = "1abz/mongo_spartan:1.0" + "$BUILD_NUMBER"
-}
+    }
 
 
 stages {
