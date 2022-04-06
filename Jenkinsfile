@@ -13,7 +13,7 @@ url: 'https://github.com/mrasuli/mongo_spartan.git'
 
 
 
-stage('Build Docker Image') {
+    stage('Build Docker Image') {
 steps{
 script {
 DOCKER_IMAGE = docker.build '1abz/spartan_test'
