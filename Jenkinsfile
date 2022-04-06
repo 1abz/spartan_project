@@ -1,40 +1,35 @@
 pipeline {
-agent any
+  agent any
 
+  environment {
+    IMAGE_NAME = "1abz/spartan_test:1." + "$BUILD_NUMBER"
+    DOCKER_CREDENTIALS = 'docker_hub_cred'
+  }
+  stages {
+    stage('Cloning the project from GitHub'){
+      steps {
+        git branch: 'main',
+        url: 'https://github.com/1abz/spartan_project.git'
+      }
+    }
 
+    stage('Build Docker Image') {
+      steps {
+        script {
+          DOCKER_IMAGE = docker.build IMAGE_NAME
+        }
+      }
+    }
 
-environment {
-IMAGE_NAME = '1abz/spartan_test:1.' + "$BUILD_NUMBER"
-DOCKER_CREDNETIALS = "docker_hub_cred"
-}
+    stage('Push to Docker Hub'){
+      steps {
+        script {
+          docker.withRegistry('', DOCKER_CREDENTIALS){
+            DOCKER_IMAGE.push()
+          }
+        }
+      }
+    }
+  }
 
-
-
-stages {
-stage('Cloning the project from GitHub'){
-steps {
-git branch: 'main',
-url: 'https://github.com/1abz/spartan_project.git'
-}
-}
-
-
-
-stage('Build Docker Image') {
-steps{
-script {
-DOCKER_IMAGE = docker.build IMAGE_NAME
-}
-}
-}
-stage("Push to Docker Hub"){
-steps {
-script {
-docker.withRegistry('', 'docker_hub_cred'){
-DOCKER_IMAGE.push()
-}
-}
-}
-}
-}
 }
