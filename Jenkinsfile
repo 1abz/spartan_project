@@ -1,7 +1,7 @@
 pipeline {
 agent any
 environment {
-IMAGE_NAME =
+IMAGE_NAME = "1abz/mongo_spartan:1.0" + "$BUILD_NUMBER"
 }
 
 
@@ -18,7 +18,7 @@ url: 'https://github.com/1abz/spartan_project.git'
 stage('Build Docker Image') {
 steps{
 script {
-DOCKER_IMAGE = docker.build '1abz/mongo_spartan'
+DOCKER_IMAGE = docker.build IMAGE_NAME
 }
 }
 }
