@@ -1,13 +1,15 @@
 pipeline {
 agent any
-
+environment {
+IMAGE_NAME =
+}
 
 
 stages {
 stage('Cloning the project from GitHub'){
 steps {
 git branch: 'main',
-url: 'https://github.com/mrasuli/mongo_spartan.git'
+url: 'https://github.com/1abz/spartan_project.git'
 }
 }
 
